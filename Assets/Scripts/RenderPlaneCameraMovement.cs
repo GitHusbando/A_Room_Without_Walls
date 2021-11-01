@@ -15,7 +15,7 @@ public class RenderPlaneCameraMovement : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void LateUpdate()
     {
         transform.position = cameraToCopy.transform.position + cameraOffset;
         transform.rotation = cameraToCopy.transform.rotation;
