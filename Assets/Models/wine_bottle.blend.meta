@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 9b566684067dd1d46a2ce26136d9eda7
+guid: 16f2f590c5a6f9c428b27c1484c863b0
 ModelImporter:
   serializedVersion: 20200
   internalIDToNameTable: []
@@ -7,8 +7,13 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Material
-    second: {fileID: 2100000, guid: 6ec815b2bf5570242a64bac9341ae9e8, type: 2}
+      name: Green Glass
+    second: {fileID: 2100000, guid: 7753c416443ce0e4f86897c95160a052, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Wine
+    second: {fileID: 2100000, guid: ac85d30a78f0fc240b2ceaeb6ba5231d, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -44,7 +49,7 @@ ModelImporter:
     addColliders: 1
     useSRGBMaterialColor: 1
     sortHierarchyByName: 1
-    importVisibility: 0
+    importVisibility: 1
     importBlendShapes: 1
     importCameras: 0
     importLights: 0
