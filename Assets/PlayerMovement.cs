@@ -21,6 +21,7 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {   
         isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
+        // print(isGrounded); testing groundCheck
         if(isGrounded && velocity.y < 0){
             velocity.y = -2f;
         }
