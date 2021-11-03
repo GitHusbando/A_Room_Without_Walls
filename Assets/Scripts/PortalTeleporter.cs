@@ -21,11 +21,11 @@ public class PortalTeleporter : MonoBehaviour
             // if this is true; player is moved across the portal
             if (dotProduct < 0f){
                 // teleport 
-                float rotationDiff = Quarternion.Angle(transform.rotation, reciever.rotation);
+                float rotationDiff = Quaternion.Angle(transform.rotation, reciever.rotation);
                 rotationDiff += 180;
                 player.Rotate(Vector3.up, rotationDiff);
 
-                Vector3 positionOffset = Quarternion.Euler(0f, rotationDiff, 0f) * portalToPlayer;
+                Vector3 positionOffset = Quaternion.Euler(0f, rotationDiff, 0f) * portalToPlayer;
                 player.position = reciever.position + positionOffset;
 
                 playerIsOverlapping = false;
