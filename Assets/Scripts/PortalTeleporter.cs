@@ -13,12 +13,15 @@ public class PortalTeleporter : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
+        //Debug.Log(playerIsOverlapping);
         if (playerIsOverlapping){
             Vector3 portalToPlayer = player.position - transform.position;
             float dotProduct = Vector3.Dot(transform.up, portalToPlayer);
-
+            
             //Debug.Log(player.position);
             // if this is true; player is moved across the portal
+            
             if (dotProduct < 0f){
                 // teleport 
                 float rotationDiff = Quaternion.Angle(transform.rotation, reciever.rotation);
@@ -31,12 +34,21 @@ public class PortalTeleporter : MonoBehaviour
                 playerIsOverlapping = false;
             }
         }
+        
     }
 
     void OnTriggerEnter (Collider coll){
         if (coll.tag == "Player"){
             playerIsOverlapping = true;
-            Debug.Log(player.position);
+            //Debug.Log(player.position);
+        }
+    }
+
+    void OnTriggerExit (Collider coll){
+        if (coll.tag == "Player"){
+            playerIsOverlapping = false;
+            //player.transform.position = reciever.transform.position;
+            //Debug.Log(player.position);
         }
     }
 }
