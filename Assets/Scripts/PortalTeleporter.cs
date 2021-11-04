@@ -9,6 +9,10 @@ public class PortalTeleporter : MonoBehaviour
 
     private bool playerIsOverlapping = false;
 
+    void Start(){
+        //Debug.Log(player.position);
+        //Debug.Log(reciever.position);
+    }
 
     // Update is called once per frame
     void Update()
@@ -30,7 +34,8 @@ public class PortalTeleporter : MonoBehaviour
 
                 Vector3 positionOffset = Quaternion.Euler(0f, rotationDiff, 0f) * portalToPlayer;
                 player.position = reciever.position + positionOffset;
-                Debug.Log(player.position);
+                //Debug.Log(player.position);
+                //Debug.Log(reciever.position);
                 playerIsOverlapping = false;
             }
         }
@@ -40,7 +45,8 @@ public class PortalTeleporter : MonoBehaviour
     void OnTriggerEnter (Collider coll){
         if (coll.tag == "Player"){
             playerIsOverlapping = true;
-            //Debug.Log(player.position);
+            //player.position =reciever.position;
+            //Debug.Log("went thru");
         }
     }
 
