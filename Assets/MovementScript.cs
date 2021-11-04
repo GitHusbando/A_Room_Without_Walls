@@ -30,10 +30,12 @@ public class MovementScript : MonoBehaviour
 
         //make player face the direction they are moving
         // add a delay so switching direction isn't instantaneous
+        /*
         var mix = 0.99f;
         facing_direction = mix * this.facing_direction + (1.0f - mix) * direction;
         var transform = this.GetComponent<Transform>();
         var target = transform.position + direction;
         transform.LookAt(target);
+        */
     }
 }
