@@ -2,9 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+
 
 public class Timer : MonoBehaviour
 {
+
+    public GameObject gameOverUI;
     public float timeRemaining = 10;
     public bool timerIsRunning = false;
     public Text timeText;
@@ -13,6 +17,7 @@ public class Timer : MonoBehaviour
     {
         // Starts the timer automatically
         timerIsRunning = true;
+        gameOverUI.SetActive(false);
     }
 
     void Update()
@@ -29,8 +34,18 @@ public class Timer : MonoBehaviour
                 Debug.Log("Time has run out!");
                 timeRemaining = 0;
                 timerIsRunning = false;
+                gameOverUI.SetActive(true);
+                //Time.timeScale = 0f;
             }
         }
+
+        if (gameOverUI.activeInHierarchy){
+            if (Input.GetKey(KeyCode.R)){
+                Debug.Log("restarted");
+                Reload();
+            }
+        }
+        
     }
 
     void DisplayTime(float timeToDisplay)
@@ -42,4 +57,11 @@ public class Timer : MonoBehaviour
 
         timeText.text = string.Format("{0:00}:{1:00}", minutes, seconds);
     }
+
+    //Reloads the Level
+	public void Reload(){
+        //SceneManager.UnloadSceneAsync(SceneManager.GetActiveScene().name);
+		SceneManager.LoadSceneAsync(SceneManager.GetActiveScene().name);
+	}
+
 }
