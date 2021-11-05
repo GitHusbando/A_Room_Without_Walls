@@ -4,53 +4,39 @@ using UnityEngine;
 
 public class PlayerMovementScript : MonoBehaviour
 {
-    //code yoinked (stolen) with modifications from https://docs.unity3d.com/ScriptReference/CharacterController.Move.html
-
-    public Camera mainCamera;
-
-    CharacterController controller;
-
-    private float PLAYER_SPEED = 5.0f;
-    private float LOOK_SPEED = 3.0f;
-    private float JUMP_STRENGTH = 3.0f; //we probably don't want the player to be able to jump too high (to avoid seeing things they shouldn't)
-    private float GRAVITY_VALUE = -9.81f;
-
-    private float verticalVelocity;
-    private Vector2 mouseRotation;
-
     // Start is called before the first frame update
-    void Start()
-    {
-        Cursor.lockState = CursorLockMode.Locked;
-        controller = GetComponent<CharacterController>();
-    }
+    public CharacterController controller;
+    
+    public float speed = 12f;
+    public float gravity = -19.81f;
+    public float jumpHeight = 1.5f;
+    public Transform groundCheck;
+    public float groundDistance = 0.4f;
+    public LayerMask groundMask;
 
+
+    Vector3 velocity;
+    bool isGrounded;
     // Update is called once per frame
     void Update()
-    {
-        mouseRotation.x = -1 * Input.GetAxis("Mouse Y");
-        mouseRotation.y = Input.GetAxis("Mouse X");
-
-        transform.Rotate(0, mouseRotation.y * LOOK_SPEED, 0);
-        mainCamera.transform.Rotate(mouseRotation.x * LOOK_SPEED, 0, 0);
-
-        verticalVelocity += GRAVITY_VALUE * Time.deltaTime;
-
-        if (controller.isGrounded)
-        {
-            if (verticalVelocity < 0)
-            {
-                verticalVelocity = 0f;
-            }
-            if (Input.GetButtonDown("Jump"))
-            {
-                //jumping only seems to work sometimes?
-                verticalVelocity = JUMP_STRENGTH;
-            }
+    {   
+        isGrounded = Physics.CheckSphere(groundCheck.position, groundDistance, groundMask);
+        print(isGrounded); //testing groundcheck
+        if(isGrounded && velocity.y < 0){
+            velocity.y = -2f;
         }
+        float x = Input.GetAxis("Horizontal");
+        float z = Input.GetAxis("Vertical");
 
-        Vector3 move = new Vector3(Input.GetAxis("Horizontal"), verticalVelocity, Input.GetAxis("Vertical"));
-        move = this.transform.TransformDirection(move); //take into account player rotation
-        controller.Move(move * Time.deltaTime * PLAYER_SPEED);
+        Vector3 move = transform.right * x + transform.forward * z;
+
+        controller.Move(move * speed * Time.deltaTime);
+
+        if(Input.GetButton("Jump") && isGrounded){
+            velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
+        }
+        velocity.y += gravity * Time.deltaTime;
+
+        controller.Move(velocity * Time.deltaTime);
     }
 }
