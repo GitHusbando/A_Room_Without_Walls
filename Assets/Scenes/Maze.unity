@@ -11781,7 +11781,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameOverUI: {fileID: 2061329618}
-  timeRemaining: 150
+  timeRemaining: 10
   timerIsRunning: 0
   timeText: {fileID: 1317955128}
 --- !u!114 &1317955128

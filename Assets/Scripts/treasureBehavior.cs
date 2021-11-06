@@ -22,7 +22,7 @@ public class treasureBehavior : MonoBehaviour
         pumpkin = (GameObject)Resources.Load("pumpkinPrefab", typeof(GameObject));
         tree = (GameObject)Resources.Load("OptimizedTree", typeof(GameObject));
         source = GetComponent<AudioSource>();
-        if (score > 0){
+        if (scoreCount.score > 0){
             // play pick up sound 
             source.Play(0);
         }
@@ -36,7 +36,7 @@ public class treasureBehavior : MonoBehaviour
          if(col.tag =="Player"){
             source.Play();
             Destroy(gameObject);
-            score++;
+            scoreCount.score++;
             GameObject temp = burger;
             int spawn = Random.Range(0,spawnLocations.Length);
             print("This is the length of the array " + spawnLocations.Length);
