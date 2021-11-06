@@ -13,10 +13,18 @@ public class PlayerMovementScript : MonoBehaviour
     public Transform groundCheck;
     public float groundDistance = 0.4f;
     public LayerMask groundMask;
-
+    public AudioSource source;
 
     Vector3 velocity;
     bool isGrounded;
+
+
+    void Start(){
+        source = GetComponent<AudioSource>();
+        source.Play(0);
+        source.Pause();
+    }
+
     // Update is called once per frame
     void Update()
     {   
@@ -38,5 +46,26 @@ public class PlayerMovementScript : MonoBehaviour
         velocity.y += gravity * Time.deltaTime;
 
         controller.Move(velocity * Time.deltaTime);
+
+        if ((Input.GetAxis("Horizontal") > 0 || Input.GetAxis("Horizontal") < 0 ) || 
+                (Input.GetAxis("Vertical") > 0 || Input.GetAxis("Vertical") < 0 )){
+            source.volume = Random.Range(0.6f, 1);
+            source.pitch = Random.Range(0.5f, 1.5f);
+            source.UnPause();
+            StartCoroutine(ExampleCoroutine());
+
+        }  else {
+            source.Pause();
+        }
+
+    }
+
+    IEnumerator ExampleCoroutine()
+    {
+
+
+        //yield on a new YieldInstruction that waits for 5 seconds.
+        yield return new WaitForSeconds(4);
+
     }
 }
