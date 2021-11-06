@@ -18,6 +18,6 @@ public class gameOverText : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        gameoverText.text = "Treasures collected: " + treasureBehavior.score;
+        gameoverText.text = "Treasures collected: " + scoreCount.score;
     }
 }
